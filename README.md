@@ -1,34 +1,28 @@
 
+TO USE:
+
+open the file "NeonCoolRevisited.ino"
+
+- be sure that #include "NeonCoolFunctions.h" is defined with quotes, NOT <>
+- be sure that in the void setup(){} function you have "initLights()" written, this does basic initial setup.
+- for now, only one larger effect can be used, but you can use perOfVis as much as you want.``
 
 
+Learned some things today:
 
+The arduino when working with the neon cool shield does NOT like classes or methods or anything object oriented with this tool.
+Had multiple occurences during debugging the library that the same code line by line except that one was a method of the class "neonLight" and the other
+was a function defined in the .ino 
 
-Be sure to add the library contents to your path - correctly before trying to run the sketch project.
+Thus the solution to keep this code as easy to use as possible was just to put the function definitions in a header file. This has a couple of advantages:
 
+There are no path changes necessary, ideally, you should just be able to open NeonCoolRevisited/NeonCoolRevisisted.ino with the NeonCoolFunctions.h left as it is.
+and there shouldn't be any issues with functions not being defined or whatever. 
 
-I want to explain a method I wrote called:
+All functions are defined at the beginning of the .h file, just take a look at the function prototypes and start playing around!
 
+TODO:
+I need to add in a handler so that you can use a couple of the different functions for different strobing effects. As of right now there is none, which means you
+can only call one function inside of the main (unless you are using perOfVis() which is basically the only exception right now)
 
-perOfVis(int startLed,int endLed, int skipBy, int offSet)
-
-
-Its basically the foundation of pretty much any effect you want to do: 
-
-
-(including the "swipe()" method written as an example)
-
-
-so the parameters are neat:
-
-
-startLed, is the beginning strip you want to affect, and endLed is the last one, so if startLed = 3 and endLed = 5; then just that segment, lights 3 - 5 are the only ones that will be maintain persistance of vision.
-
-
-the parameter skipBy is a number that represents how many LED's you are going to skip to maintain persistance of vision, so if you put in skipBy=1 every other LED starting after the number specified by startLED will be skipped. 
-
-
-And finally offSet is used to determine which of the lights you wish to start from from within the range specified for a POS effect.
-
-
-This is useful say if you want to make your pattern appear to "shift" a pattern down the strip, you can specify an offset put it on a timer and let it loop and bam there you go:
-
+Also, just more cool effects, get creative!
